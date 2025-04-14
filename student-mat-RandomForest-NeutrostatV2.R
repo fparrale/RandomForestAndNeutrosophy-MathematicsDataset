@@ -68,12 +68,28 @@ rf_model <- randomForest(G3 ~ ., data = trainData, ntree = 100, importance = TRU
 # 6. Make predictions
 predictions <- predict(rf_model, newdata = testData)
 
+
+
 # 7. Calculate residuals and absolute errors
 real <- as.numeric(levels(testData$G3))[testData$G3]
 predicted <- as.numeric(levels(predictions))[predictions]
 
 residuals <- predicted - real   #predictions - testData$G3
 abs_errors <- abs(residuals)
+
+
+library(Metrics)
+# Mean Absolute Error (MAE)
+mae <- mae(real, predicted)
+cat("Mean Absolute Error (MAE):", mae, "\n")
+
+# Root Mean Squared Error (RMSE)
+rmse_value <- rmse(real, predicted)
+cat("Root Mean Squared Error (RMSE):", rmse_value, "\n")
+
+# R-squared (goodness of fit)
+r_squared <- 1 - sum((residuals)^2) / sum((real - mean(real))^2)
+cat("R-squared:", r_squared, "\n")
 
 
 # 8. Define Neutrosophic Interpretation
@@ -111,12 +127,13 @@ results <- data.frame(
 head(results)
 
 # 9. Plot error vs neutrosophic values
+#title = "Neutrosophic Interpretation of Prediction Error", 
 library(ggplot2)
 ggplot(results, aes(x = Error)) +
   geom_point(aes(y = T, color = "Truth")) +
   geom_point(aes(y = I, color = "Indeterminacy")) +
   geom_point(aes(y = F, color = "Falsity")) +
-  labs(title = "Neutrosophic Interpretation of Prediction Error", y = "Neutrosophic Values") +
+  labs(y = "Neutrosophic Values") +
   theme_minimal()
 
 
