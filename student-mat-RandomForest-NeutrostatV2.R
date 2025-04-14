@@ -77,7 +77,25 @@ predicted <- as.numeric(levels(predictions))[predictions]
 residuals <- predicted - real   #predictions - testData$G3
 abs_errors <- abs(residuals)
 
+# 8. Create a dataframe for plotting errors
+plot_data <- data.frame(
+  Actual = real,
+  Predicted = predicted
+)
 
+# Plot
+ggplot(plot_data, aes(x = Actual, y = Predicted)) +
+  geom_point(color = "blue", alpha = 0.6, size = 2) +
+  geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed", size = 1) +
+  labs(
+    #title = "Actual vs Predicted G3 Values",
+    x = "Actual G3",
+    y = "Predicted G3"
+  ) +
+  theme_minimal() +
+  coord_equal()
+
+# 9. Computing Metrics
 library(Metrics)
 # Mean Absolute Error (MAE)
 mae <- mae(real, predicted)
@@ -92,7 +110,7 @@ r_squared <- 1 - sum((residuals)^2) / sum((real - mean(real))^2)
 cat("R-squared:", r_squared, "\n")
 
 
-# 8. Define Neutrosophic Interpretation
+# 10. Define Neutrosophic Interpretation
 # We'll define:
 # - Truth (T): small error (good prediction)
 # - Indeterminacy (I): medium error (uncertain)
@@ -126,7 +144,7 @@ results <- data.frame(
 # View sample
 head(results)
 
-# 9. Plot error vs neutrosophic values
+# 11. Plot error vs neutrosophic values
 #title = "Neutrosophic Interpretation of Prediction Error", 
 library(ggplot2)
 ggplot(results, aes(x = Error)) +
