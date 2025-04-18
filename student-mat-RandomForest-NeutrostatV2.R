@@ -88,7 +88,7 @@ ggplot(plot_data, aes(x = Actual, y = Predicted)) +
   geom_point(color = "blue", alpha = 0.6, size = 2) +
   geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed", size = 1) +
   labs(
-    #title = "Actual vs Predicted G3 Values",
+    title = "Actual vs Predicted G3 Values",
     x = "Actual G3",
     y = "Predicted G3"
   ) +
@@ -173,6 +173,7 @@ ggplot(plot_data, aes(x = Actual, y = Predicted, size = Indeterminacy, color = I
   scale_size_continuous(range = c(2, 6), name = "Indeterminacy (I)") +
   scale_color_gradient(low = "blue", high = "orange", name = "Indeterminacy (I)") +
   labs(
+    title = "Actual vs Predicted G3 Values with Indeterminacy",
     x = "Actual G3",
     y = "Predicted G3"
   ) +
@@ -189,13 +190,12 @@ ggplot(plot_data, aes(x = Actual, y = Predicted, size = Indeterminacy, color = I
 
 
 # 12. Plot error vs neutrosophic values
-#title = "Neutrosophic Interpretation of Prediction Error", 
-library(ggplot2)
 ggplot(results, aes(x = Error)) +
   geom_point(aes(y = T, color = "Truth")) +
   geom_point(aes(y = I, color = "Indeterminacy")) +
   geom_point(aes(y = F, color = "Falsity")) +
-  labs(y = "Neutrosophic Values") +
+  labs(title = "Neutrosophic Interpretation of Prediction Error", 
+       y = "Neutrosophic Values") +
   theme_minimal()
 
 
