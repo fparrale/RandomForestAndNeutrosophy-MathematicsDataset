@@ -1,4 +1,4 @@
-setwd("C:/Users/fparr/Documents/SOFT/Redes Bayesianas/FRPB-clases/Ejercicios/Estudiantes/")
+
 #Step-by-Step Plan
 #1. Data Understanding
 #We’ll load the dataset and check out its structure. Then, we’ll prepare it for modeling.
@@ -160,6 +160,13 @@ plot_data <- data.frame(
 )
 
 # Generate the plot with points sized by indeterminacy
+#...........................................................
+#plot_data combines the actual values (real), predicted values (predicted), and indeterminacy values (neutrosophic_df$I) into a single dataframe.
+#Plot Customization:
+# geom_point: Points are plotted with alpha = 0.6 for transparency, and their size and color are mapped to the indeterminacy values.
+# scale_size_continuous: Adjusts the size range of the points (smaller for low indeterminacy, larger for high indeterminacy).
+# scale_color_gradient: Uses a gradient from blue (low indeterminacy) to orange (high indeterminacy) to visually distinguish confidence levels.
+# geom_abline: Adds a dashed red line for perfect predictions (Predicted = Actual).
 ggplot(plot_data, aes(x = Actual, y = Predicted, size = Indeterminacy, color = Indeterminacy)) +
   geom_point(alpha = 0.6) +
   geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed", size = 1) +
