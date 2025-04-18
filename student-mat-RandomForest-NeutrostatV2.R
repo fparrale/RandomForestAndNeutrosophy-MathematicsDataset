@@ -95,6 +95,12 @@ ggplot(plot_data, aes(x = Actual, y = Predicted)) +
   theme_minimal() +
   coord_equal()
 
+
+
+
+
+
+
 # 9. Computing Metrics
 library(Metrics)
 # Mean Absolute Error (MAE)
@@ -144,7 +150,38 @@ results <- data.frame(
 # View sample
 head(results)
 
-# 11. Plot error vs neutrosophic values
+
+
+# 11. Create a dataframe for plotting with actual, predicted, and indeterminacy (I) values
+plot_data <- data.frame(
+  Actual = real,
+  Predicted = predicted,
+  Indeterminacy = neutrosophic_df$I
+)
+
+# Generate the plot with points sized by indeterminacy
+ggplot(plot_data, aes(x = Actual, y = Predicted, size = Indeterminacy, color = Indeterminacy)) +
+  geom_point(alpha = 0.6) +
+  geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed", size = 1) +
+  scale_size_continuous(range = c(2, 6), name = "Indeterminacy (I)") +
+  scale_color_gradient(low = "blue", high = "orange", name = "Indeterminacy (I)") +
+  labs(
+    x = "Actual G3",
+    y = "Predicted G3"
+  ) +
+  theme_minimal() +
+  coord_equal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "right"
+  )
+
+
+
+
+
+
+# 12. Plot error vs neutrosophic values
 #title = "Neutrosophic Interpretation of Prediction Error", 
 library(ggplot2)
 ggplot(results, aes(x = Error)) +
@@ -162,3 +199,5 @@ ggplot(results, aes(x = Error)) +
 #We interpret the confidence of predictions using a neutrosophic scale.
 
 #Output includes Truth (T), Indeterminacy (I), and Falsity (F) values for each prediction.
+
+######################################################
