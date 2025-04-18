@@ -40,6 +40,15 @@ This project uses **only the `student-mat.csv`** file (mathematics performance).
   - Neutrosophic interpretation of prediction error
 
 ---
+## Key Results:
+- Model Performance:
+  - MAE: 1.54
+  - RMSE: 3.02
+  - R²: 0.61
+- Neutrosophic Interpretation:
+  - Predictions classified as confident (T=0.9), uncertain (I=0.4), or unreliable (F=0.5) based on error thresholds.
+
+---
 
 
 ## 📂 Repository Structure
@@ -48,19 +57,15 @@ student-mat.csv # Student performance dataset (mathematics)
 
 student-mat-RandomForest-NeutrostatV2.R # R code for analysis
 
-## Quick Start
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/fparrale/RandomForestAndNeutrosophy-MathematicsDataset.git
-   cd RandomForestAndNeutrosophy-MathematicsDataset
+---
 
-## Key Results:
-- Model Performance:
-  - MAE: 1.54
-  - RMSE: 3.02
-  - R²: 0.61
-- Neutrosophic Interpretation:
-  - Predictions classified as confident (T=0.9), uncertain (I=0.4), or unreliable (F=0.5) based on error thresholds.
+## 📦 Requirements
+
+Install the necessary libraries with:
+
+```r
+install.packages(c("randomForest", "ggplot2", "dplyr", "scales"))
+```
 
 ---
 
